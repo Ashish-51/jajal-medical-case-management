@@ -1,0 +1,204 @@
+{
+  "info": {
+    "name": "Jajal Medical Case Management API",
+    "_postman_id": "9b9d8ac5-2622-4c1c-989f-f961fa400cd3",
+    "description": "Postman / Thunder Client collection for Jajal Medical Case Management REST API with Laravel Sanctum.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:8000/api",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "1. Login (Admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@jajalmedical.com\",\n  \"password\": \"AdminPass123!\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["login"]
+            }
+          }
+        },
+        {
+          "name": "2. Login (Viewer)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"viewer@jajalmedical.com\",\n  \"password\": \"ViewerPass123!\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["login"]
+            }
+          }
+        },
+        {
+          "name": "3. Logout",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                { "key": "token", "value": "{{token}}", "type": "string" }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/logout",
+              "host": ["{{baseUrl}}"],
+              "path": ["logout"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cases",
+      "item": [
+        {
+          "name": "1. List Cases (Paginated & Filtered)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                { "key": "token", "value": "{{token}}", "type": "string" }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/cases?status=Planning&search=Vance",
+              "host": ["{{baseUrl}}"],
+              "path": ["cases"],
+              "query": [
+                { "key": "status", "value": "Planning" },
+                { "key": "search", "value": "Vance" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "2. Create Case (Admin Only)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                { "key": "token", "value": "{{token}}", "type": "string" }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"case_number\": \"CASE-API-9001\",\n  \"patient_reference\": \"PAT-7721-M\",\n  \"surgeon_name\": \"Dr. Marcus Vance\",\n  \"implant_type\": \"Total Knee System - Titanium Cruciate-Retaining\",\n  \"status\": \"Planning\",\n  \"priority\": \"High\",\n  \"surgery_date\": \"2026-11-20\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/cases",
+              "host": ["{{baseUrl}}"],
+              "path": ["cases"]
+            }
+          }
+        },
+        {
+          "name": "3. Get Case Details",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                { "key": "token", "value": "{{token}}", "type": "string" }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/cases/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["cases", "1"]
+            }
+          }
+        },
+        {
+          "name": "4. Update Case (Admin Only)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                { "key": "token", "value": "{{token}}", "type": "string" }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"case_number\": \"CASE-1001\",\n  \"patient_reference\": \"PAT-8492-X1\",\n  \"surgeon_name\": \"Dr. Marcus Vance\",\n  \"implant_type\": \"Total Knee System - Titanium Cruciate-Retaining\",\n  \"status\": \"Approved\",\n  \"priority\": \"High\",\n  \"surgery_date\": \"2026-11-25\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/cases/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["cases", "1"]
+            }
+          }
+        },
+        {
+          "name": "5. Delete Case (Admin Only)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                { "key": "token", "value": "{{token}}", "type": "string" }
+              ]
+            },
+            "method": "DELETE",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/cases/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["cases", "1"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
