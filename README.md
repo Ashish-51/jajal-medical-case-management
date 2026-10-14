@@ -188,12 +188,7 @@ curl -X POST http://127.0.0.1:8000/api/cases \
 
 ---
 
-## 9. Git Repository & Publishing
-The project is initialized as a local Git repository with logical, structured commits:
-- Remote URL Placeholder: `https://github.com/your-username/jajal-medical-case-management.git`
-- To push to a remote repository:
-  ```bash
-  git remote add origin <REMOTE_URL>
-  git branch -M main
-  git push -u origin main
-  ```
+## 9. Git Repository
+The repository is published and publicly available:
+- **Repository URL:** [https://github.com/Ashish-51/jajal-medical-case-management](https://github.com/Ashish-51/jajal-medical-case-management)
+- **Clone URL:** `https://github.com/Ashish-51/jajal-medical-case-management.git`
